@@ -8,6 +8,7 @@
 )]
 #![allow(dead_code)]
 #![windows_subsystem = "console"]
+#![doc = include_str!("../README.md")]
 
 mod day_1;
 
