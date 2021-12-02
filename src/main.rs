@@ -14,12 +14,12 @@ mod day_2;
 
 fn main() {
     // Day 1
-    // let input_day1 = day_1::collect_input(include_str!("day_1/input.txt"));
+    // let input_day1 = day_1::parse_input(include_str!("day_1/input.txt"));
     // println!("{}", day_1::sonar_sweep_1(&input_day1)); // 1215
     // println!("{}", day_1::sonar_sweep_2(&input_day1)); // 1150
 
     // Day 2
-    let input_day2 = day_2::collect_input(include_str!("day_2/input.txt"));
+    let input_day2 = day_2::parse_input(include_str!("day_2/input.txt"));
     println!("{}", day_2::dive(&input_day2, day_2::Submarine::default())); // 1694130
     println!("{}", day_2::dive(&input_day2, day_2::Submarine::with_aim())); // 1698850445
 }

@@ -1,6 +1,6 @@
 //! [Day 1](https://adventofcode.com/2020/day/1): Sonar sweep thingy.
 
-pub fn collect_input(input: &str) -> Vec<usize> {
+pub fn parse_input(input: &str) -> Vec<usize> {
     input
         .split_whitespace()
         .filter_map(|s| s.parse::<usize>().ok())
