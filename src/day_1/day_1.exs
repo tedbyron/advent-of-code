@@ -13,9 +13,13 @@ defmodule Day1 do
     |> Enum.count()
   end
 
-  # @spec sonar_sweep_2(depths()) :: integer()
-  # def sonar_sweep_2(depths) do
-  # end
+  @spec sonar_sweep_2(depths()) :: integer()
+  def sonar_sweep_2(depths) do
+    depths
+    |> Stream.chunk_every(3, 1, :discard)
+    |> Stream.map(&Enum.sum/1)
+    |> sonar_sweep_1()
+  end
 end
 
 input =
@@ -24,4 +28,6 @@ input =
   |> Stream.map(&String.to_integer/1)
 
 IO.puts(Day1.sonar_sweep_1(input))
-# IO.puts(Day1.sonar_sweep_2(input))
+# 1215
+IO.puts(Day1.sonar_sweep_2(input))
+# 1150
