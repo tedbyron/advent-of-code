@@ -30,17 +30,17 @@ impl Submarine {
     }
 
     fn travel(&mut self, direction: Direction, distance: i32) {
-        match (direction, self.aim) {
-            (Direction::Forward, None) => self.x += distance,
-            (Direction::Down, None) => self.y += distance,
-            (Direction::Up, None) => self.y -= distance,
+        match (self.aim, direction) {
+            (None, Direction::Forward) => self.x += distance,
+            (None, Direction::Down) => self.y += distance,
+            (None, Direction::Up) => self.y -= distance,
 
-            (Direction::Forward, Some(a)) => {
+            (Some(a), Direction::Forward) => {
                 self.x += distance;
                 self.y += a * distance;
             }
-            (Direction::Down, Some(a)) => self.aim = Some(a + distance),
-            (Direction::Up, Some(a)) => self.aim = Some(a - distance),
+            (Some(a), Direction::Down) => self.aim = Some(a + distance),
+            (Some(a), Direction::Up) => self.aim = Some(a - distance),
         }
     }
 }
