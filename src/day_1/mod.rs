@@ -1,4 +1,4 @@
-//! [Day 1](https://adventofcode.com/2020/day/1): Sonar sweep thingy.
+//! [Day 1](https://adventofcode.com/2021/day/1): Sonar sweep thingy.
 
 pub fn parse_input(input: &str) -> Vec<usize> {
     input

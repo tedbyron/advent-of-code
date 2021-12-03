@@ -1,17 +1,15 @@
 defmodule Day1 do
   @moduledoc """
-  [Day 1](https://adventofcode.com/2020/day/1): Sonar sweep thingy.
+  [Day 1](https://adventofcode.com/2021/day/1): Sonar sweep thingy.
   """
 
-  @spec sonar_sweep_1(Enum.t()) :: integer()
   def sonar_sweep_1(depths) do
     depths
     |> Stream.chunk_every(2, 1, :discard)
-    |> Stream.filter(fn [a, b] -> a < b end)
+    |> Stream.filter(fn [left, right] -> a < b end)
     |> Enum.count()
   end
 
-  @spec sonar_sweep_2(Enum.t()) :: integer()
   def sonar_sweep_2(depths) do
     depths
     |> Stream.chunk_every(3, 1, :discard)

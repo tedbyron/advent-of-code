@@ -1,4 +1,4 @@
-//! [Day 2](https://adventofcode.com/2020/day/2): Submarine movement.
+//! [Day 2](https://adventofcode.com/2021/day/2): Submarine movement.
 
 pub fn parse_input(input: &str) -> Vec<(Direction, i32)> {
     input
