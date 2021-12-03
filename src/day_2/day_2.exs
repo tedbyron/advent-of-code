@@ -20,8 +20,7 @@ defmodule Day2 do
       {"down", dist}, {aim, x, y} -> {aim + dist, x, y}
       {"up", dist}, {aim, x, y} -> {aim - dist, x, y}
     end)
-    |> Tuple.delete_at(0)
-    |> Tuple.product()
+    |> then(fn {_, x, y} -> x * y end)
   end
 end
 
