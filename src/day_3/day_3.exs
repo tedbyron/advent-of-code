@@ -21,16 +21,20 @@ defmodule Day3 do
     |> then(fn {gamma, epsilon} -> to_int(gamma) * to_int(epsilon) end)
   end
 
-  defp rating([val], _, _), do: String.to_integer(val, 2)
-  defp min_max(groups, :min), do: Enum.min_by(groups, &length(elem(&1, 1)), &>/2)
-  defp min_max(groups, :max), do: Enum.max_by(groups, &length(elem(&1, 1)))
-
-  defp rating(input, type, idx \\ 0) do
+  defp rating(input, min_max, idx \\ 0) do
     input
     |> Enum.group_by(&String.at(&1, idx))
-    |> min_max(type)
+    |> then(fn map ->
+      case min_max do
+        :min -> Enum.min_by(map, &length(elem(&1, 1)))
+        :max -> Enum.max_by(map, &length(elem(&1, 1)), &>/2)
+      end
+    end)
     |> elem(1)
-    |> rating(type, idx + 1)
+    |> then(fn
+      [res] -> String.to_integer(res, 2)
+      res -> rating(res, min_max, idx + 1)
+    end)
   end
 
   def power_consumption_2(input), do: rating(input, :min) * rating(input, :max)
@@ -42,5 +46,5 @@ input =
 
 IO.puts(Day3.power_consumption_1(input))
 # 2250414
-IO.inspect(Day3.power_consumption_2(input))
-#
+IO.puts(Day3.power_consumption_2(input))
+# 6085575
