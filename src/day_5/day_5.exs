@@ -30,7 +30,7 @@ defmodule Day5 do
 end
 
 input =
-  File.stream!("input.txt")
+  File.stream!("src/day_5/input.txt")
   |> Stream.map(&String.trim/1)
   |> Stream.map(&String.split(&1, ~r{\D+}))
   |> Stream.map(fn line -> Enum.map(line, &String.to_integer/1) end)

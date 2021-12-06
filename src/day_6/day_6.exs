@@ -23,7 +23,7 @@ defmodule Day6 do
 end
 
 input =
-  File.read!("input.txt")
+  File.read!("src/day_6/input.txt")
   |> String.split(~r{\D+}, trim: true)
   |> Stream.map(&String.to_integer/1)
   |> Enum.frequencies()

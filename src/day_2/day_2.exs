@@ -25,7 +25,7 @@ defmodule Day2 do
 end
 
 input =
-  File.stream!("input.txt")
+  File.stream!("src/day_2/input.txt")
   |> Stream.map(&String.split/1)
   |> Stream.map(fn [dir, dist] -> {dir, String.to_integer(dist)} end)
 

@@ -6,7 +6,7 @@ defmodule Day1 do
   def sonar_sweep_1(depths) do
     depths
     |> Stream.chunk_every(2, 1, :discard)
-    |> Stream.filter(fn [left, right] -> a < b end)
+    |> Stream.filter(fn [left, right] -> left < right end)
     |> Enum.count()
   end
 
@@ -19,7 +19,7 @@ defmodule Day1 do
 end
 
 input =
-  File.stream!("input.txt")
+  File.stream!("src/day_1/input.txt")
   |> Stream.map(&String.trim/1)
   |> Stream.map(&String.to_integer/1)
 

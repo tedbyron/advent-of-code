@@ -29,7 +29,7 @@ defmodule Day3 do
 end
 
 input =
-  File.stream!("input.txt")
+  File.stream!("src/day_3/input.txt")
   |> Stream.map(&String.trim/1)
   |> Stream.map(fn line -> String.graphemes(line) |> Enum.map(&String.to_integer(&1, 2)) end)
 

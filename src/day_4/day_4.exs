@@ -57,7 +57,7 @@ defmodule Day4 do
 end
 
 [input | boards] =
-  File.read!("input.txt")
+  File.read!("src/day_4/input.txt")
   |> String.split("\n\n", trim: true)
   |> Enum.map(&String.split(&1, ~r{[\n|,]}, trim: true))
 
@@ -68,6 +68,6 @@ boards =
   |> Enum.map(fn board -> {board, Enum.zip_with(board, & &1)} end)
 
 IO.puts(Day4.bingo_1(input, boards))
-# # 23177
-IO.puts(Day4.bingo_2(input, boards))
+# 23177
+IO.puts(Day4.bingo_2(input, Enum.reverse(boards)))
 # 6804
