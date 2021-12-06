@@ -32,11 +32,8 @@ end
 input =
   File.stream!("input.txt")
   |> Stream.map(&String.trim/1)
-  |> Stream.map(fn line ->
-    Regex.scan(~r{\d+}, line)
-    |> List.flatten()
-    |> Enum.map(&String.to_integer/1)
-  end)
+  |> Stream.map(&String.split(&1, ~r{\D+}))
+  |> Stream.map(fn line -> Enum.map(line, &String.to_integer/1) end)
 
 IO.puts(Day5.hydro_vent_1(input))
 # 5084
