@@ -23,7 +23,7 @@ defmodule Day5 do
     Stream.flat_map(input, fn
       [x, y1, x, y2] -> for y <- y1..y2, do: {x, y}
       [x1, y, x2, y] -> for x <- x1..x2, do: {x, y}
-      [x1, y1, x2, y2] -> [x1..x2, y1..y2] |> Stream.map(&Enum.to_list/1) |> Enum.zip()
+      [x1, y1, x2, y2] -> [x1..x2, y1..y2] |> Stream.map(&Enum.to_list/1) |> Stream.zip()
     end)
     |> freq_count()
   end

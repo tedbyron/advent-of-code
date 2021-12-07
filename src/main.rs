@@ -21,7 +21,12 @@ fn main() {
     // println!("{}", day_1::sonar_sweep_2(&input_day1)); // 1150
 
     // Day 2
-    let input_day2 = day_2::parse_input(include_str!("day_2/input.txt"));
-    println!("{}", day_2::dive(&input_day2, day_2::Submarine::default())); // 1694130
-    println!("{}", day_2::dive(&input_day2, day_2::Submarine::with_aim())); // 1698850445
+    // let input_day2 = day_2::parse_input(include_str!("day_2/input.txt"));
+    // println!("{}", day_2::dive(&input_day2, day_2::Submarine::default())); // 1694130
+    // println!("{}", day_2::dive(&input_day2, day_2::Submarine::with_aim())); // 1698850445
+
+    // Day 3
+    let input_day3 = day_3::parse_input(include_str!("day_3/input.txt"));
+    println!("{}", day_3::power_consumption_1(&input_day3));
+    println!("{}", day_3::power_consumption_2(&input_day3));
 }
