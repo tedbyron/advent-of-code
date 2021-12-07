@@ -3,6 +3,8 @@ defmodule Day6 do
   [Day 6](https://adventofcode.com/2021/day/6): Lanternfish.
   """
 
+  def lanternfish_1(input), do: fishy_count(input, 80)
+  def lanternfish_2(input), do: fishy_count(input, 256)
   defp fishy_count(input, 0), do: Map.values(input) |> Enum.sum()
 
   defp fishy_count(input, iterations) do
@@ -11,14 +13,6 @@ defmodule Day6 do
       {key, val}, acc -> Map.update(acc, key - 1, val, &(&1 + val))
     end)
     |> fishy_count(iterations - 1)
-  end
-
-  def lanternfish_1(input) do
-    fishy_count(input, 80)
-  end
-
-  def lanternfish_2(input) do
-    fishy_count(input, 256)
   end
 end
 
