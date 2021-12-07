@@ -10,7 +10,7 @@ defmodule Day7 do
 
   def crab_2(input) do
     mean = Enum.to_list(input) |> int_mean()
-    input |> Stream.map(&(1..abs(&1 - mean) |> Enum.to_list() |> Enum.sum())) |> Enum.sum()
+    input |> Stream.map(&(1..abs(&1 - mean) |> Enum.sum())) |> Enum.sum()
   end
 
   defp int_median(input) do
