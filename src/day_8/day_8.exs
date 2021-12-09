@@ -17,8 +17,8 @@ defmodule Day8 do
       one = Enum.find(signals, &(byte_size(&1) == 2)) |> String.to_charlist()
       four = Enum.find(signals, &(byte_size(&1) == 4)) |> String.to_charlist()
       
-      Stream.map(outputs, fn signal ->
-        case byte_size(signal) do
+      Stream.map(outputs, fn output ->
+        case byte_size(output) do
           2 -> 1
           4 -> 4
           3 -> 7
@@ -26,8 +26,8 @@ defmodule Day8 do
           size ->
             case {
               size,
-              String.to_charlist(signal) |> Stream.filter(&Kernel.in(&1, one)) |> Enum.count(),
-              String.to_charlist(signal) |> Stream.filter(&Kernel.in(&1, four)) |> Enum.count(),
+              String.to_charlist(output) |> Stream.filter(&Kernel.in(&1, one)) |> Enum.count(),
+              String.to_charlist(output) |> Stream.filter(&Kernel.in(&1, four)) |> Enum.count(),
             } do
               {5, 1, 3} -> 5
               {5, 2, 3} -> 3
@@ -39,7 +39,7 @@ defmodule Day8 do
         end
       end)
       |> Stream.with_index()
-      |> Stream.map(fn {signal, idx} -> signal * 10 ** (3 - idx) end)
+      |> Stream.map(fn {output, idx} -> output * 10 ** (3 - idx) end)
       |> Enum.sum()
     end)
     |> Enum.sum()
@@ -53,5 +53,5 @@ input =
 
 IO.puts(Day8.digits_1(input))
 # 449
-IO.inspect(Day8.digits_2(input))
-# 965250 <
+IO.puts(Day8.digits_2(input))
+# 968175
