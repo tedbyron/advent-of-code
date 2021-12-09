@@ -26,7 +26,13 @@ fn main() {
     // println!("{}", day_2::dive(&input_day2, day_2::Submarine::with_aim())); // 1698850445
 
     // Day 3
-    let input_day3 = day_3::parse_input(include_str!("day_3/input.txt"));
-    println!("{}", day_3::power_consumption_1(&input_day3));
-    println!("{}", day_3::power_consumption_2(&input_day3));
+    // let input_day3 = day_3::parse_input(include_str!("day_3/input.txt"));
+    // println!("{}", day_3::power_consumption_1(&input_day3)); // 2250414
+    // println!("{}", day_3::power_consumption_2(&input_day3)); // 6085575
+
+    // Day 4
+    let input_day4 = day_4::parse_input(include_str!("day_4/input.txt"));
+    println!("{:?}", input_day4);
+    // println!("{}", day_4::bingo_1(&input_day4)); // 23177
+    // println!("{}", day_4::bingo_2(&input_day4)); // 6804
 }

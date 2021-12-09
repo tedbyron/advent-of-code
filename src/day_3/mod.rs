@@ -8,19 +8,19 @@ pub fn parse_input(input: &str) -> Vec<u32> {
 
 pub fn power_consumption_1(input: &[u32]) -> u32 {
     let (rows, cols) = (input.len() / 12, 12);
-    let (γ, ε) = transpose(input, rows, cols)
+    let (gamma, epsilon) = transpose(input, rows, cols)
         .as_slice()
         .chunks_exact(rows)
         .map(|col| frequencies(col.iter().copied()))
         .fold(
             (String::with_capacity(cols), String::with_capacity(cols)),
-            |(γ, ε), freqs| {
-                if freqs[&0] > freqs[&1] { (γ + "0", ε + "1") } 
-                else { (γ + "1", ε + "0") }
+            |(gamma, epsilon), freqs| {
+                if freqs[&0] > freqs[&1] { (gamma + "0", epsilon + "1") } 
+                else { (gamma + "1", epsilon + "0") }
             },
         );
 
-    u32::from_str_radix(&γ, 2).unwrap() * u32::from_str_radix(&ε, 2).unwrap()
+    u32::from_str_radix(&gamma, 2).unwrap() * u32::from_str_radix(&epsilon, 2).unwrap()
 }
 
 pub fn power_consumption_2(input: &[u32]) -> u32 {

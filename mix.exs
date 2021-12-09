@@ -22,7 +22,9 @@ defmodule AdventOfCode2021 do
       day4: ["run src/day_4/day_4.exs"],
       day5: ["run src/day_5/day_5.exs"],
       day6: ["run src/day_6/day_6.exs"],
-      day7: ["run src/day_7/day_7.exs"]
+      day7: ["run src/day_7/day_7.exs"],
+      day8: ["run src/day_8/day_8.exs"],
+      day9: ["run src/day_9/day_9.exs"]
     ]
   end
 end
