@@ -1,5 +1,5 @@
-fn main() {
-    let mut elves = include_str!("../inputs/day_01.txt")
+fn main() -> anyhow::Result<()> {
+    let mut elves = std::fs::read_to_string("inputs/day_01.txt")?
         .split("\n\n")
         .map(|elf| elf.split('\n').flat_map(str::parse::<i32>).sum::<i32>())
         .collect::<Vec<_>>();
@@ -7,4 +7,6 @@ fn main() {
 
     println!("{}", elves[0]);
     println!("{}", elves[..3].iter().sum::<i32>());
+
+    Ok(())
 }

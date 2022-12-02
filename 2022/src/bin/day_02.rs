@@ -1,8 +1,8 @@
-fn main() {
+fn main() -> anyhow::Result<()> {
     let mut p1 = 0;
     let mut p2 = 0;
 
-    for mut chars in include_str!("../inputs/day_02.txt")
+    for mut chars in std::fs::read_to_string("inputs/day_02.txt")?
         .lines()
         .map(|line| line.chars().filter(char::is_ascii_alphabetic))
     {
@@ -14,4 +14,6 @@ fn main() {
 
     println!("{p1}");
     println!("{p2}");
+
+    Ok(())
 }
