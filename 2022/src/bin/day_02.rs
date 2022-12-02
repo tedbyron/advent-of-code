@@ -8,8 +8,8 @@ fn main() {
     {
         let abc = game.next().unwrap() as u8 - b'A';
         let xyz = game.next().unwrap() as u8 - b'X';
-        p1 += u32::from((xyz + 1) + (3 * ((xyz + 1 + (3 - abc)) % 3)));
-        p2 += u32::from(((xyz + abc + 2) % 3 + 1) + (3 * xyz));
+        p1 += u32::from((xyz + 1) + ((xyz + 1 + (3 - abc)) % 3 * 3));
+        p2 += u32::from(((xyz + abc + 2) % 3 + 1) + (xyz * 3));
     }
 
     println!("{p1}");
