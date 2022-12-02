@@ -1,5 +1,3 @@
-#![warn(clippy::all, clippy::nursery, rust_2018_idioms)]
-
 fn main() {
     let mut elves = include_str!("../inputs/day_01.txt")
         .split("\n\n")
