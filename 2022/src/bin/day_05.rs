@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::iter;
 
 fn main() -> anyhow::Result<()> {
     let input = std::fs::read_to_string("inputs/day_05.txt")?;
@@ -10,63 +10,58 @@ fn main() -> anyhow::Result<()> {
         .take(crates.len() - 1)
         .map(|line| {
             line.chars()
-                .enumerate()
                 .skip(1)
                 .step_by(4)
-                .filter_map(|(i, c)| {
-                    if c.is_ascii_alphabetic() {
-                        Some(((i + 3) / 4, c))
-                    } else {
-                        None
-                    }
-                })
+                .enumerate()
+                .filter_map(|(i, c)| if c != ' ' { Some((i, c)) } else { None })
         })
         .collect::<Vec<_>>();
 
-    let mut crates1 = crates.into_iter().rfold(HashMap::new(), |mut map, line| {
+    let mut crates1 = Vec::with_capacity(9);
+    crates1.extend(iter::repeat(Vec::with_capacity(64)).take(9));
+
+    for line in crates.into_iter().rev() {
         for (i, c) in line {
-            map.entry(i).or_insert_with(Vec::new).push(c);
+            crates1[i].push(c);
         }
-        map
-    });
-    let mut crates2 = crates1.clone();
-
-    let procedure = procedure.lines().map(|line| {
-        line.split_ascii_whitespace()
-            .flat_map(str::parse::<usize>)
-            .collect::<Vec<_>>()
-    });
-
-    for instr in procedure {
-        let entry = crates1.entry(instr[1]).or_default();
-        let mut moved = entry.split_off(entry.len() - instr[0]);
-        moved.reverse();
-        crates1.entry(instr[2]).or_default().extend(moved);
-
-        let entry = crates2.entry(instr[1]).or_default();
-        let moved = entry.split_off(entry.len() - instr[0]);
-        crates2.entry(instr[2]).or_default().extend(moved);
     }
 
-    println!("{}", get_top(crates1));
-    println!("{}", get_top(crates2));
+    let mut crates2 = crates1.clone();
+    let mut instr = Vec::with_capacity(3);
+
+    for line in procedure.lines() {
+        instr.clear();
+        instr.extend(
+            line.split_ascii_whitespace()
+                .skip(1)
+                .step_by(2)
+                .map(|s| unsafe { s.parse::<usize>().unwrap_unchecked() }),
+        );
+
+        let from = instr[1] - 1;
+        let to = instr[2] - 1;
+
+        let len = crates1[from].len();
+        let mut moved = crates1[from].split_off(len - instr[0]);
+        moved.reverse();
+        crates1[to].extend(moved);
+
+        let len = crates2[from].len();
+        let moved = crates2[from].split_off(len - instr[0]);
+        crates2[to].extend(moved);
+    }
+
+    println!("{}", top(&crates1));
+    println!("{}", top(&crates2));
 
     Ok(())
 }
 
-fn get_top(crates: HashMap<usize, Vec<char>>) -> String {
-    let mut top_crates = crates
+fn top(crates: &[Vec<char>]) -> String {
+    crates
         .iter()
-        .fold(Vec::new(), |mut crates, (&stack, items)| {
-            crates.push((stack, items.last().unwrap()));
-            crates
-        });
-    top_crates.sort_by(|(stack1, _), (stack2, _)| stack1.cmp(stack2));
-
-    top_crates
-        .into_iter()
-        .fold(String::new(), |mut s, (_, item)| {
-            s.push(*item);
+        .fold(String::with_capacity(9), |mut s, stack| {
+            s.push(*stack.last().unwrap());
             s
         })
 }
