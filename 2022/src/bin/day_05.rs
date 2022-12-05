@@ -39,14 +39,12 @@ fn main() -> anyhow::Result<()> {
 
     for instr in procedure {
         let entry = crates1.entry(instr[1]).or_default();
-        let moved = entry
-            .drain(entry.len() - instr[0]..)
-            .rev()
-            .collect::<Vec<_>>();
+        let mut moved = entry.split_off(entry.len() - instr[0]);
+        moved.reverse();
         crates1.entry(instr[2]).or_default().extend(moved);
 
         let entry = crates2.entry(instr[1]).or_default();
-        let moved = entry.drain(entry.len() - instr[0]..).collect::<Vec<_>>();
+        let moved = entry.split_off(entry.len() - instr[0]);
         crates2.entry(instr[2]).or_default().extend(moved);
     }
 
