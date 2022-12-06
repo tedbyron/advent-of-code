@@ -33,7 +33,7 @@ fn main() -> std::io::Result<()> {
             line.split_ascii_whitespace()
                 .skip(1)
                 .step_by(2)
-                .map(|s| unsafe { s.parse::<usize>().unwrap_unchecked() }),
+                .flat_map(str::parse::<usize>),
         );
 
         let from = instr[1] - 1;
