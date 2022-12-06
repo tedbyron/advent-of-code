@@ -1,4 +1,4 @@
-fn main() -> anyhow::Result<()> {
+fn main() -> std::io::Result<()> {
     let input = std::fs::read_to_string("inputs/day_03.txt")?;
 
     let p1 = input

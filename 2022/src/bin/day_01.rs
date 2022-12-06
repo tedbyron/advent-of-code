@@ -1,4 +1,4 @@
-fn main() -> anyhow::Result<()> {
+fn main() -> std::io::Result<()> {
     let mut elves = std::fs::read_to_string("inputs/day_01.txt")?
         .split("\n\n")
         .map(|elf| elf.split('\n').flat_map(str::parse::<i32>).sum::<i32>())

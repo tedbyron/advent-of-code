@@ -1,6 +1,4 @@
-use std::iter;
-
-fn main() -> anyhow::Result<()> {
+fn main() -> std::io::Result<()> {
     let input = std::fs::read_to_string("inputs/day_05.txt")?;
     let (crates, procedure) = input.split_once("\n\n").unwrap();
 
@@ -18,7 +16,7 @@ fn main() -> anyhow::Result<()> {
         .collect::<Vec<_>>();
 
     let mut crates1 = Vec::with_capacity(9);
-    crates1.extend(iter::repeat(Vec::with_capacity(64)).take(9));
+    crates1.extend(std::iter::repeat(Vec::with_capacity(64)).take(9));
 
     for line in crates.into_iter().rev() {
         for (i, c) in line {

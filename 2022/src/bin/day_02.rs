@@ -1,4 +1,4 @@
-fn main() -> anyhow::Result<()> {
+fn main() -> std::io::Result<()> {
     let mut p1 = 0;
     let mut p2 = 0;
 
