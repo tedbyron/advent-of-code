@@ -18,8 +18,6 @@ fn main() -> std::io::Result<()> {
         }
     }
 
-    println!("{p1}");
-    println!("{p2}");
-
+    println!("{p1} {p2}");
     Ok(())
 }

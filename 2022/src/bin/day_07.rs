@@ -1,15 +1,12 @@
-use std::collections::HashMap;
-use std::iter;
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let input = std::fs::read_to_string("inputs/day_07.txt")?;
     let mut dirs = vec![];
-    let mut sizes: HashMap<Vec<&str>, u32> = HashMap::new();
+    let mut sizes = std::collections::HashMap::<Vec<&str>, u32>::new();
 
     for line in input
         .lines()
         .map(str::split_ascii_whitespace)
-        .map(iter::Iterator::collect::<Vec<_>>)
+        .map(std::iter::Iterator::collect::<Vec<_>>)
     {
         match *line.as_slice() {
             ["$", "ls"] | ["dir", _] => (),
@@ -19,7 +16,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             ["$", "cd", dir] => dirs.push(dir),
             [size, _] => {
                 for dir in dirs.iter().enumerate().map(|(i, &dir)| {
-                    iter::once(dir)
+                    std::iter::once(dir)
                         .chain(dirs.iter().cloned().skip(1).take(i))
                         .collect()
                 }) {
@@ -37,8 +34,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .min()
         .unwrap();
 
-    println!("{p1}");
-    println!("{p2}");
-
+    println!("{p1} {p2}");
     Ok(())
 }

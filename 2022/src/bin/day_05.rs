@@ -49,9 +49,7 @@ fn main() -> std::io::Result<()> {
         crates2[to].extend(moved);
     }
 
-    println!("{}", top(&crates1));
-    println!("{}", top(&crates2));
-
+    println!("{} {}", top(&crates1), top(&crates2));
     Ok(())
 }
 

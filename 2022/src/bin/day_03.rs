@@ -23,9 +23,7 @@ fn main() -> std::io::Result<()> {
         .map(priority)
         .sum::<u32>();
 
-    println!("{p1}");
-    println!("{p2}");
-
+    println!("{p1} {p2}");
     Ok(())
 }
 

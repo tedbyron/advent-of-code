@@ -5,8 +5,6 @@ fn main() -> std::io::Result<()> {
         .collect::<Vec<_>>();
     elves.select_nth_unstable_by(2, |a, b| b.cmp(a));
 
-    println!("{}", elves[0]);
-    println!("{}", elves[..3].iter().sum::<i32>());
-
+    println!("{} {}", elves[0], elves[..3].iter().sum::<i32>());
     Ok(())
 }

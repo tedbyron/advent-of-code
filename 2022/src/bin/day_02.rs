@@ -12,8 +12,6 @@ fn main() -> std::io::Result<()> {
         p2 += u32::from(((xyz + abc + 2) % 3 + 1) + (xyz * 3));
     }
 
-    println!("{p1}");
-    println!("{p2}");
-
+    println!("{p1} {p2}");
     Ok(())
 }
