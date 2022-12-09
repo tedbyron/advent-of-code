@@ -12,4 +12,3 @@ strip = true
 [dependencies]
 anyhow = "1.0.66"
 itertools = "0.10.5"
-nalgebra = "0.31.4"
