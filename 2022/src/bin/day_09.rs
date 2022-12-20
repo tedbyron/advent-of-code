@@ -1,36 +1,39 @@
 use std::collections::HashSet;
-use std::ops::{Add, Sub};
 
 fn main() -> anyhow::Result<()> {
     let input = std::fs::read_to_string("inputs/day_09.txt")?;
-    let (mut h, mut t): ((i32, i32), (i32, i32)) = ((0, 0), (0, 0));
-    let mut locations = HashSet::new();
-    locations.insert(t);
-    println!("{:?}, {:?}", h, t);
+    let mut p1 = HashSet::new();
+    let mut p2 = HashSet::new();
+    let mut rope = [(0_i32, 0_i32); 10];
 
     for (dir, n) in input.lines().map(|l| l.split_once(' ').unwrap()) {
-        let n = n.parse::<i32>()?;
-        match dir {
-            "U" => p1(&mut h.1, &mut t.1, i32::add, n),
-            "D" => p1(&mut h.1, &mut t.1, i32::sub, n),
-            "L" => p1(&mut h.0, &mut t.0, i32::sub, n),
-            "R" => p1(&mut h.0, &mut t.0, i32::add, n),
+        let delta = match dir {
+            "U" => (0, 1),
+            "D" => (0, -1),
+            "L" => (-1, 0),
+            "R" => (1, 0),
             _ => unreachable!(),
-        }
-        println!("{:?}, {:?}", h, t);
-        locations.insert(t);
-    }
-    println!("{}, {}", locations.len(), 3);
-    Ok(())
-}
+        };
 
-fn p1<F>(h: &mut i32, t: &mut i32, op: F, n: i32)
-where
-    F: Fn(i32, i32) -> i32,
-{
-    *h += n;
-    let diff: i32 = *t - *h;
-    if diff.abs() > 1 {
-        *t = op(*h, diff.signum());
+        for _ in 0..n.parse::<i32>()? {
+            rope[0].0 += delta.0;
+            rope[0].1 += delta.1;
+
+            for t in 1..10 {
+                let (head, tail) = (rope[t - 1], &mut rope[t]);
+                if head.0.abs_diff(tail.0) > 1 || head.1.abs_diff(tail.1) > 1 {
+                    tail.0 += (head.0 - tail.0).signum();
+                    tail.1 += (head.1 - tail.1).signum();
+                } else {
+                    break;
+                }
+            }
+
+            p1.insert(rope[1]);
+            p2.insert(rope[9]);
+        }
     }
+
+    println!("{}, {}", p1.len(), p2.len());
+    Ok(())
 }
