@@ -1,6 +1,6 @@
 fn main() -> anyhow::Result<()> {
     let input = std::fs::read_to_string("inputs/day_10.txt")?;
-    let (mut x, mut cycle) = (1, 0);
+    let (mut x, mut cycle) = (1, 0_i32);
     let (mut p1, mut p2) = (0, String::new());
 
     for line in input
@@ -15,9 +15,9 @@ fn main() -> anyhow::Result<()> {
         };
 
         for _ in 0..cycles {
-            let lit = (cycle as i64 % 40).abs_diff(x) <= 1;
+            let lit = (cycle % 40).abs_diff(x) <= 1;
             cycle += 1;
-            p1 += (cycle % 40 == 20) as i64 * cycle as i64 * x;
+            p1 += if cycle % 40 == 20 { cycle * x } else { 0 };
             p2.push(if lit { '#' } else { '.' });
             if cycle % 40 == 0 {
                 p2.push('\n');
