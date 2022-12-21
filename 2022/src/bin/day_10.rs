@@ -1,42 +1,32 @@
-struct P1 {
-    cycle_count: i32,
-    signal_strength: i32,
-    sum: i32,
-}
-
-impl P1 {
-    fn cycle(&mut self) {
-        self.cycle_count += 1;
-        if [20, 60, 100, 140, 180, 220].contains(&self.cycle_count) {
-            self.sum += self.cycle_count * self.signal_strength
-        }
-    }
-}
-
 fn main() -> anyhow::Result<()> {
     let input = std::fs::read_to_string("inputs/day_10.txt")?;
-    let mut p1 = P1 {
-        cycle_count: 0,
-        signal_strength: 1,
-        sum: 0,
-    };
+    let (mut x, mut cycle) = (1, 0);
+    let (mut p1, mut p2) = (0, String::new());
 
     for line in input
         .lines()
         .map(str::split_ascii_whitespace)
         .map(Iterator::collect::<Vec<_>>)
     {
-        match *line {
-            ["noop"] => p1.cycle(),
-            ["addx", v] => {
-                p1.cycle();
-                p1.cycle();
-                p1.signal_strength += v.parse::<i32>()?;
-            }
+        let (cycles, v) = match *line {
+            ["noop"] => (1, 0),
+            ["addx", v] => (2, v.parse()?),
             _ => unreachable!(),
+        };
+
+        for _ in 0..cycles {
+            let lit = (cycle as i64 % 40).abs_diff(x) <= 1;
+            cycle += 1;
+            p1 += (cycle % 40 == 20) as i64 * cycle as i64 * x;
+            p2.push(if lit { '#' } else { '.' });
+            if cycle % 40 == 0 {
+                p2.push('\n');
+            }
         }
+
+        x += v;
     }
 
-    println!("{}, {}", p1.sum, p2);
+    println!("{p1}\n{p2}");
     Ok(())
 }
