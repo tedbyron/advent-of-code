@@ -36,10 +36,7 @@ fn main() -> anyhow::Result<()> {
 
     let (a, b) = input
         .lines()
-        .filter_map(|l| {
-            let (_, game) = parse_game(l).ok()?;
-            Some(game)
-        })
+        .filter_map(|l| parse_game(l).ok().map(|(_, game)| game))
         .fold((0, 0), |(a, b), Game { mut n, sets }| {
             let max = sets.into_iter().fold(Rgb::new(), |mut max, set| {
                 if set.r > rules_1.r || set.g > rules_1.g || set.b > rules_1.b {

@@ -9,8 +9,7 @@ fn main() -> anyhow::Result<()> {
         (0,  -1),          (0,  1),
         (1,  -1), (1,  0), (1,  1),
     ];
-    let input = read_input(file!())?;
-    let input: Vec<Vec<char>> = input
+    let input: Vec<Vec<char>> = read_input(file!())?
         .lines()
         .map(str::chars)
         .map(Iterator::collect)
