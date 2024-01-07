@@ -9,7 +9,7 @@ fn main() -> anyhow::Result<()> {
         .next()
         .map(|s| {
             s.split(':')
-                .nth(1)
+                .last()
                 .map(|s| s.split(' ').flat_map(str::parse::<i64>))
                 .unwrap()
                 .collect::<Vec<_>>()
