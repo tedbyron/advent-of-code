@@ -37,13 +37,11 @@ fn main() -> anyhow::Result<()> {
         })
     };
     let a = seeds.par_iter().copied().map(in_range).min().unwrap();
-    let seeds = seeds
+    let b = seeds
         .into_iter()
         .tuples()
         .map(|(a, b)| a..a + b)
-        .collect::<Vec<_>>();
-    let b = seeds
-        .into_par_iter()
+        .par_bridge()
         .flat_map(|range| range.into_iter())
         .map(in_range)
         .min()
