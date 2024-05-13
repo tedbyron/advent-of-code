@@ -9,7 +9,7 @@ use nom::{
 };
 
 fn main() -> anyhow::Result<()> {
-    let input = read_input(file!())?;
+    let input = read_input!()?;
     let mut copies = vec![1; input.lines().count()];
 
     let a = input

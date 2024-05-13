@@ -4,7 +4,7 @@ use regex::Regex;
 fn main() -> anyhow::Result<()> {
     let re_l = Regex::new(r"([1-9]|one|two|three|four|five|six|seven|eight|nine).*$")?;
     let re_r = Regex::new(r"^.*([1-9]|one|two|three|four|five|six|seven|eight|nine)")?;
-    let (a, b) = read_input(file!())?
+    let (a, b) = read_input!()?
         .lines()
         .filter_map(|l| {
             let mut digits1 = l.matches(|c: char| c.is_ascii_digit());

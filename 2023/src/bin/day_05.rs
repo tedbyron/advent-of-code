@@ -3,7 +3,7 @@ use itertools::Itertools;
 use rayon::prelude::*;
 
 fn main() -> anyhow::Result<()> {
-    let input = read_input(file!())?;
+    let input = read_input!()?;
     let mut input = input.split("\n\n");
     let seeds = input
         .next()

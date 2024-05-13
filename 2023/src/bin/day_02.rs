@@ -31,7 +31,7 @@ struct Game {
 }
 
 fn main() -> anyhow::Result<()> {
-    let input = read_input(file!())?;
+    let input = read_input!()?;
     let rules_1 = Rgb::from(12, 13, 14);
 
     let (a, b) = input

@@ -1,7 +1,7 @@
 use advent_of_code_2023::read_input;
 
 fn main() -> anyhow::Result<()> {
-    let input = read_input(file!())?;
+    let input = read_input!()?;
     let input = input
         .lines()
         .map(|l| {
