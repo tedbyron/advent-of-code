@@ -1,4 +1,3 @@
-/// Read the input file for the current day.
 #[macro_export]
 macro_rules! read_input {
     () => {{
