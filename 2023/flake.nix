@@ -1,32 +1,33 @@
 {
   description = "advent-of-code-2023";
 
-  inputs.rust.url = "github:oxalica/rust-overlay";
+  inputs.rust-overlay = {
+    url = "github:oxalica/rust-overlay";
+
+    inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-utils.follows = "flake-utils";
+    };
+  };
 
   outputs =
     {
       self,
       nixpkgs,
       flake-utils,
-      rust,
+      rust-overlay,
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        overlays = [ (import rust) ];
+        overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs { inherit system overlays; };
-        rust-toolchain = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
+        rust = pkgs.rust-bin.fromRustupToolchainFile ./rust-toolchain.toml;
       in
+      with pkgs;
       {
-        formatter = pkgs.nixfmt-rfc-style;
-
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [
-            openssl
-            pkg-config
-            rust-toolchain
-          ];
-        };
+        formatter = nixfmt-rfc-style;
+        devShells.default = mkShell { packages = [ rust ]; };
       }
     );
 }
