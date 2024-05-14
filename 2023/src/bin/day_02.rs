@@ -1,4 +1,3 @@
-use advent_of_code_2023::read_input;
 use nom::{
     branch::alt,
     bytes::complete::tag,
@@ -21,7 +20,7 @@ impl Rgb {
     }
 
     const fn from(r: u8, g: u8, b: u8) -> Self {
-        Self { r, b, g }
+        Self { r, g, b }
     }
 }
 
@@ -30,8 +29,8 @@ struct Game {
     sets: Vec<Rgb>,
 }
 
-fn main() -> anyhow::Result<()> {
-    let input = read_input!()?;
+fn main() {
+    let input = advent_of_code_2023::read_input!();
     let rules_1 = Rgb::from(12, 13, 14);
 
     let (a, b) = input
@@ -56,8 +55,6 @@ fn main() -> anyhow::Result<()> {
 
     println!("part 1: {a}");
     println!("part 2: {b}");
-
-    Ok(())
 }
 
 fn parse_game(s: &str) -> IResult<&str, Game> {

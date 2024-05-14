@@ -1,9 +1,8 @@
-use advent_of_code_2023::read_input;
 use itertools::Itertools;
 use rayon::prelude::*;
 
-fn main() -> anyhow::Result<()> {
-    let input = read_input!()?;
+fn main() {
+    let input = advent_of_code_2023::read_input!();
     let mut input = input.split("\n\n");
     let seeds = input
         .next()
@@ -42,13 +41,11 @@ fn main() -> anyhow::Result<()> {
         .tuples()
         .map(|(a, b)| a..a + b)
         .par_bridge()
-        .flat_map(|range| range.into_iter())
+        .flat_map(std::iter::IntoIterator::into_iter)
         .map(in_range)
         .min()
         .unwrap();
 
     println!("{a}");
     println!("{b}");
-
-    Ok(())
 }

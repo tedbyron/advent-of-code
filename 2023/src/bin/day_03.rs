@@ -1,15 +1,13 @@
 #![feature(let_chains)]
 
-use advent_of_code_2023::read_input;
-
-fn main() -> anyhow::Result<()> {
+fn main() {
     #[rustfmt::skip]
     let deltas = [
         (-1, -1), (-1, 0), (-1, 1),
         (0,  -1),          (0,  1),
         (1,  -1), (1,  0), (1,  1),
     ];
-    let input: Vec<Vec<char>> = read_input!()?
+    let input: Vec<Vec<char>> = advent_of_code_2023::read_input!()
         .lines()
         .map(str::chars)
         .map(Iterator::collect)
@@ -64,7 +62,7 @@ fn main() -> anyhow::Result<()> {
                     } else if c == &'*'
                         && let Some(adjacent_parts) = maybe_gear(i, j)
                     {
-                        gears.push(adjacent_parts)
+                        gears.push(adjacent_parts);
                     }
 
                     if (!c.is_ascii_digit() || j == line_len - 1) && !group.is_empty() {
@@ -118,6 +116,4 @@ fn main() -> anyhow::Result<()> {
 
     println!("part 1: {a}");
     println!("part 2: {b}");
-
-    Ok(())
 }

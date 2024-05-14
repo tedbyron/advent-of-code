@@ -1,4 +1,3 @@
-use advent_of_code_2023::read_input;
 use nom::{
     bytes::complete::tag,
     character::complete::{i32, multispace1},
@@ -8,8 +7,8 @@ use nom::{
     IResult,
 };
 
-fn main() -> anyhow::Result<()> {
-    let input = read_input!()?;
+fn main() {
+    let input = advent_of_code_2023::read_input!();
     let mut copies = vec![1; input.lines().count()];
 
     let a = input
@@ -34,8 +33,6 @@ fn main() -> anyhow::Result<()> {
 
     println!("{a}");
     println!("{b}");
-
-    Ok(())
 }
 
 fn parse_line(s: &str) -> IResult<&str, (Vec<i32>, Vec<i32>)> {

@@ -1,6 +1,5 @@
 use std::{borrow::Cow, cmp::Ordering, collections::HashMap};
 
-use advent_of_code_2023::read_input;
 use itertools::{Itertools, Position};
 
 struct Hand {
@@ -60,12 +59,12 @@ fn winnings(input: &str, ord: &str, cmp: impl FnMut(&Hand, &Hand) -> Ordering) -
         .sum()
 }
 
-fn main() -> anyhow::Result<()> {
-    let input = read_input!()?;
+fn main() {
+    let input = advent_of_code_2023::read_input!();
     let a = winnings(
         &input,
         "23456789TJQKA",
-        cmp(|hand| counts_value(&*counts(hand))),
+        cmp(|hand| counts_value(counts(hand))),
     );
     let b = winnings(
         &input,
@@ -97,6 +96,4 @@ fn main() -> anyhow::Result<()> {
 
     println!("{a}");
     println!("{b}");
-
-    Ok(())
 }
