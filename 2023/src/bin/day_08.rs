@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 use nom::{
     bytes::complete::tag,
     character::complete::alpha1,
@@ -48,7 +46,7 @@ fn main() {
         input
             .flat_map(parse_line)
             .map(|(_, parsed)| parsed)
-            .collect::<HashMap<_, _>>(),
+            .collect::<std::collections::HashMap<_, _>>(),
     );
 
     let (mut a, mut node) = (0, "AAA");
