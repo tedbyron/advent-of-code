@@ -5,9 +5,10 @@ macro_rules! read_input {
             "inputs/{}.txt",
             std::path::PathBuf::from(file!())
                 .file_stem()
-                .ok_or_else(|| anyhow::anyhow!("missing file stem"))?
-                .to_string_lossy()
+                .unwrap()
+                .to_str()
+                .unwrap()
         ))
-        .map_err(anyhow::Error::from)
+        .unwrap()
     }};
 }
