@@ -6,8 +6,7 @@ fn main() {
     let (start_i, start_j) = input
         .iter()
         .enumerate()
-        .filter_map(|(i, l)| l.iter().position(|c| c == &'S').map(|j| (i, j)))
-        .next()
+        .find_map(|(i, l)| l.iter().position(|c| c == &'S').map(|j| (i, j)))
         .unwrap();
 
     println!("{start_i}, {start_j}");
