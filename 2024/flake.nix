@@ -1,5 +1,5 @@
 {
-  description = "advent-of-code-2023";
+  description = "advent-of-code-2024";
 
   inputs.rust-overlay = {
     url = "github:oxalica/rust-overlay";
