@@ -40,7 +40,7 @@ fn main() {
                         input.get(ni as usize)?.get(nj as usize)
                     })
                     .collect::<String>();
-                if letters.len() == 4 && search2.contains(&&*letters) {
+                if search2.contains(&&*letters) {
                     p2 += 1;
                 }
             }
